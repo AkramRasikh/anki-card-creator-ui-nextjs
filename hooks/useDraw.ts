@@ -11,7 +11,6 @@ const useDraw = () => {
     reposition(evt);
   };
   const draw = () => {
-    console.log('## draw?: ');
     const ctx = canvas?.getContext('2d');
     ctx.beginPath();
     ctx.lineWidth = 5;

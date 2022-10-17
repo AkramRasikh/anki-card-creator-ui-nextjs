@@ -34,14 +34,14 @@ export default function Home() {
     const imageWidth = imageRef.current.width;
     canvas.width = imageWidth;
     canvas.height = imageHeight;
-    ctx.drawImage(image, 0, 0);
+    ctx.drawImage(image, 0, 0, imageWidth * 0.5, imageHeight * 0.5);
     document.addEventListener('mousedown', start);
   };
 
   React.useEffect(() => {
     const image = document?.getElementById('initImage');
     if (imageLoaded) {
-      image.style.display = 'none';
+      // image.style.display = 'none';
       canvasCreation({ imageRef, image });
     }
     if (image && !imageLoaded) {
