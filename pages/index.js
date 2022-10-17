@@ -30,11 +30,11 @@ export default function Home() {
   const canvasCreation = ({ imageRef, image }) => {
     const canvas = document.getElementById('myCanvas');
     const ctx = canvas.getContext('2d');
-    const imageHeight = imageRef.current.height;
-    const imageWidth = imageRef.current.width;
+    const imageHeight = imageRef.current.height * 0.5;
+    const imageWidth = imageRef.current.width * 0.5;
     canvas.width = imageWidth;
     canvas.height = imageHeight;
-    ctx.drawImage(image, 0, 0, imageWidth * 0.5, imageHeight * 0.5);
+    ctx.drawImage(image, 0, 0, imageWidth, imageHeight);
     document.addEventListener('mousedown', start);
   };
 
@@ -129,7 +129,7 @@ export default function Home() {
             <img id='initImage' ref={imageRef} src={imageFile} />
           </div>
         ) : null}
-        <div>
+        <div style={{ border: '1px solid' }}>
           <canvas ref={canvasRef} id='myCanvas' />
         </div>
       </div>
