@@ -24,13 +24,11 @@ const Snippet = ({
     <div style={{ border: '1px solid' }}>
       <div style={{ display: 'flex' }}>
         <Audio audioFile={audioFile} startTime={startTime} endTime={endTime} />
+        {/* span with audio references */}
         <ImageToCanvas imageFile={imageFile} imageId={id} />
         <div>
           <button onClick={downloadSnippet}>download</button>
         </div>
-      </div>
-      <div>
-        <h1>yoo here</h1>
       </div>
     </div>
   );

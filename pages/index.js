@@ -77,7 +77,7 @@ export default function Home() {
         </div>
         <div>
           {imageFile ? (
-            <ImageToCanvas imageFile={imageFile} imageId='1' />
+            <ImageToCanvas imageFile={imageFile} imageId='1' master />
           ) : null}
         </div>
         {audioSnips?.length > 0 ? (

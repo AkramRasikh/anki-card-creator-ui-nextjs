@@ -1,11 +1,31 @@
 import React from 'react';
 import useDraw from '../hooks/useDraw';
 
-const ImageToCanvas = ({ imageFile, imageId }) => {
+const ImageToCanvas = ({ imageFile, imageId, master }) => {
   const [imageLoaded, setImageLoaded] = React.useState(false);
 
   const canvasRef = React.useRef();
   const imageRef = React.useRef();
+
+  if (master) {
+    return (
+      <div>
+        <div
+          style={{
+            width: 'fit-content',
+            margin: 'auto',
+          }}
+        >
+          <img
+            id={imageId}
+            ref={imageRef}
+            src={imageFile}
+            style={{ border: '1px solid', width: '80%' }}
+          />
+        </div>
+      </div>
+    );
+  }
 
   const start = useDraw(imageId);
 
@@ -17,9 +37,6 @@ const ImageToCanvas = ({ imageFile, imageId }) => {
       const imageWidth = imageRef.current.width * 0.5;
       canvas.width = imageWidth;
       canvas.height = imageHeight;
-      console.log('## imageHeight: ', imageHeight);
-      console.log('## canvas.height: ', canvas.height);
-
       ctx.drawImage(image, 0, 0, imageWidth, imageHeight);
       document.addEventListener('mousedown', start);
     }
@@ -36,6 +53,7 @@ const ImageToCanvas = ({ imageFile, imageId }) => {
         setImageLoaded(true);
       };
     }
+
     return () => {
       document.removeEventListener('mousedown', start);
     };
@@ -45,7 +63,11 @@ const ImageToCanvas = ({ imageFile, imageId }) => {
     <div>
       <img id={imageId} ref={imageRef} src={imageFile} />
       <div
-        style={{ border: '1px solid', width: 'fit-content', margin: 'auto' }}
+        style={{
+          border: '1px solid',
+          width: 'fit-content',
+          margin: 'auto',
+        }}
       >
         <canvas ref={canvasRef} id={`myCanvas${imageId}`} />
       </div>
