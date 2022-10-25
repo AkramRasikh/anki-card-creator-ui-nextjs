@@ -40,6 +40,19 @@ export default function Home() {
     setInitStartTime(0);
   };
 
+  const handleSnippetImage = ({ id, image }) => {
+    const findSnippnet = audioSnips.map((snip) => {
+      if (snip.id === id) {
+        return {
+          ...snip,
+          image,
+        };
+      }
+      return snip;
+    });
+    setAudioSnips(findSnippnet);
+  };
+
   const disableRecordButton = !currentAudioTime;
 
   return (
@@ -78,6 +91,7 @@ export default function Home() {
                     startTime={audioSnip.startTime}
                     endTime={audioSnip.endTime}
                     imageFile={imageFile}
+                    handleSnippetImage={handleSnippetImage}
                   />
                 </li>
               ))}
