@@ -22,9 +22,10 @@ const Snippet = ({
 
   return (
     <div style={{ border: '1px solid' }}>
-      <div style={{ display: 'flex' }}>
-        <Audio audioFile={audioFile} startTime={startTime} endTime={endTime} />
+      <div>
         {/* span with audio references */}
+        <p>Audio references (from x to y)</p>
+        <Audio audioFile={audioFile} startTime={startTime} endTime={endTime} />
         <ImageToCanvas imageFile={imageFile} imageId={id} />
         <div>
           <button onClick={downloadSnippet}>download</button>
