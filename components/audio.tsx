@@ -2,8 +2,9 @@ import React from 'react';
 import styles from '../styles/Home.module.css';
 
 const Audio = ({ handleTimeUpdate, audioFile, startTime, endTime }) => {
-  const audioRef = React.useRef(null);
   const snippet = startTime || endTime;
+
+  const audioRef = React.useRef(null);
 
   const internalHandleTimeUpdate = (evt) => {
     const { currentTime } = evt.target;
@@ -19,17 +20,21 @@ const Audio = ({ handleTimeUpdate, audioFile, startTime, endTime }) => {
     }
   };
 
+  const finalHandleTimeUpdate = (evt) => {
+    handleTimeUpdate(evt);
+  };
+
   React.useEffect(() => {
     const el = audioRef.current;
     if (!snippet) {
-      el.addEventListener('timeupdate', handleTimeUpdate);
+      el.addEventListener('timeupdate', finalHandleTimeUpdate);
     } else {
       el.addEventListener('timeupdate', internalHandleTimeUpdate);
     }
 
     return () => {
       if (!snippet) {
-        el.removeEventListener('timeupdate', handleTimeUpdate);
+        el.removeEventListener('timeupdate', finalHandleTimeUpdate);
       } else {
         el.removeEventListener('timeupdate', internalHandleTimeUpdate);
       }
@@ -38,7 +43,7 @@ const Audio = ({ handleTimeUpdate, audioFile, startTime, endTime }) => {
 
   const source = !snippet
     ? audioFile
-    : audioFile + `#t=${startTime},${endTime}`; // snippet text
+    : audioFile + `#t=${startTime},${endTime}`;
 
   return (
     <audio controls className={styles.audioOriginal} ref={audioRef}>

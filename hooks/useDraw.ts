@@ -1,6 +1,6 @@
 import React from 'react';
 
-const useDraw = () => {
+const useDraw = (canvasId) => {
   const [canvas, setCanvas] = React.useState(null);
 
   let coord = { x: 0, y: 0 };
@@ -34,7 +34,7 @@ const useDraw = () => {
   };
 
   React.useEffect(() => {
-    const canvasEl = document?.getElementById('myCanvas');
+    const canvasEl = document?.getElementById(`myCanvas${canvasId}`);
     setCanvas(canvasEl);
     return () => {
       document.removeEventListener('mousemove', draw);
