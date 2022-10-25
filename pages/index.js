@@ -53,6 +53,18 @@ export default function Home() {
     setAudioSnips(findSnippnet);
   };
 
+  const handleToJsonFile = async () => {
+    await fetch('http://localhost:3001', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ snips: audioSnips }),
+    })
+      .then(() => console.log('## call done!'))
+      .catch(() => console.log('## something flopped'));
+  };
+
   const disableRecordButton = !currentAudioTime;
 
   return (
@@ -66,6 +78,7 @@ export default function Home() {
             <Audio audioFile={audioFile} handleTimeUpdate={handleTimeUpdate} />
           ) : null}
         </div>
+        <button onClick={handleToJsonFile}>Write to json file</button>
         <div>
           <button
             onMouseDown={handleOnMouseDown}
