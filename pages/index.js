@@ -11,6 +11,7 @@ export default function Home() {
   const [imageFile, setImageFile] = React.useState(null);
   const [currentAudioTime, setCurrentAudioTime] = React.useState();
   const [initStartTime, setInitStartTime] = React.useState();
+  const [fileAudioEndTime, setFileAudioEndTime] = React.useState();
   const [audioSnips, setAudioSnips] = React.useState([]);
 
   const handleAudioFileChange = (e) => {
@@ -46,6 +47,7 @@ export default function Home() {
         return {
           ...snip,
           image,
+          isSnippetCreated: true,
         };
       }
       return snip;
@@ -65,6 +67,35 @@ export default function Home() {
       .catch(() => console.log('## something flopped'));
   };
 
+  const handleMinusTimeChange = ({ id, newStartTime }) => {
+    const findSnippnet = audioSnips.map((snip) => {
+      if (snip.id === id) {
+        return {
+          ...snip,
+          startTime: newStartTime,
+        };
+      }
+      return snip;
+    });
+    setAudioSnips(findSnippnet);
+  };
+  const handlePlusTimeChange = ({ id, newEndTime }) => {
+    const findSnippnet = audioSnips.map((snip) => {
+      if (snip.id === id) {
+        return {
+          ...snip,
+          endTime: newEndTime,
+        };
+      }
+      return snip;
+    });
+    setAudioSnips(findSnippnet);
+  };
+
+  const handleAudioEndTime = (duration) => {
+    setFileAudioEndTime(duration);
+  };
+
   const disableRecordButton = !currentAudioTime;
 
   return (
@@ -75,7 +106,12 @@ export default function Home() {
         <InputImage handleImageFileChange={handleImageFileChange} />
         <div>
           {audioFile ? (
-            <Audio audioFile={audioFile} handleTimeUpdate={handleTimeUpdate} />
+            <Audio
+              audioFile={audioFile}
+              handleTimeUpdate={handleTimeUpdate}
+              handleAudioEndTime={handleAudioEndTime}
+              fileAudioEndTime={fileAudioEndTime}
+            />
           ) : null}
         </div>
         <button onClick={handleToJsonFile}>Write to json file</button>
@@ -105,6 +141,10 @@ export default function Home() {
                     endTime={audioSnip.endTime}
                     imageFile={imageFile}
                     handleSnippetImage={handleSnippetImage}
+                    handleMinusTimeChange={handleMinusTimeChange}
+                    handlePlusTimeChange={handlePlusTimeChange}
+                    isSnippetCreated={audioSnip?.isSnippetCreated}
+                    fileAudioEndTime={fileAudioEndTime}
                   />
                 </li>
               ))}

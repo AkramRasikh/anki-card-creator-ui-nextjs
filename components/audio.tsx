@@ -1,7 +1,14 @@
 import React from 'react';
 import styles from '../styles/Home.module.css';
 
-const Audio = ({ handleTimeUpdate, audioFile, startTime, endTime }) => {
+const Audio = ({
+  handleTimeUpdate,
+  handleAudioEndTime,
+  fileAudioEndTime,
+  audioFile,
+  startTime,
+  endTime,
+}) => {
   const snippet = startTime || endTime;
 
   const audioRef = React.useRef(null);
@@ -40,6 +47,12 @@ const Audio = ({ handleTimeUpdate, audioFile, startTime, endTime }) => {
       }
     };
   }, []);
+
+  React.useEffect(() => {
+    if (audioRef?.current?.duration && !snippet && !fileAudioEndTime) {
+      handleAudioEndTime(audioRef.current.duration);
+    }
+  }, [audioRef]);
 
   const source = !snippet
     ? audioFile
