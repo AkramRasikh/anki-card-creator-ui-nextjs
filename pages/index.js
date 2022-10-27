@@ -13,6 +13,7 @@ export default function Home() {
   const [initStartTime, setInitStartTime] = React.useState();
   const [fileAudioEndTime, setFileAudioEndTime] = React.useState();
   const [audioSnips, setAudioSnips] = React.useState([]);
+  const [isRecording, setIsRecording] = React.useState(false);
 
   const handleAudioFileChange = (e) => {
     const file = e.target.files[0];
@@ -31,9 +32,11 @@ export default function Home() {
   };
 
   const handleOnMouseDown = () => {
+    setIsRecording(true);
     setInitStartTime(currentAudioTime);
   };
   const handleOnMouseUp = () => {
+    setIsRecording(false);
     setAudioSnips([
       { id: nanoid(), startTime: initStartTime, endTime: currentAudioTime },
       ...audioSnips,
@@ -117,6 +120,7 @@ export default function Home() {
         <button onClick={handleToJsonFile}>Write to json file</button>
         <div>
           <button
+            style={{ background: isRecording ? 'red' : '' }}
             onMouseDown={handleOnMouseDown}
             onMouseUp={handleOnMouseUp}
             disabled={disableRecordButton}
