@@ -26,7 +26,6 @@ export default function Home() {
   };
 
   const sendAudioToServer = async (file) => {
-    console.log('sendAudioToServer');
     const data = new FormData();
     data.append('file', file, file.name);
     setIsFileUploading(true);
@@ -40,7 +39,8 @@ export default function Home() {
         if (res.status === 200) {
           setIsFileUploading(false);
         }
-      });
+      })
+      .catch(() => setIsFileUploading(false));
   };
 
   const handleImageFileChange = (e) => {
