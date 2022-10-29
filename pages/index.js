@@ -9,6 +9,7 @@ import axios from 'axios';
 
 export default function Home() {
   const [audioFile, setAudioFile] = React.useState(null);
+  const [audioFileName, setAudioFileName] = React.useState(null);
   const [imageFile, setImageFile] = React.useState(null);
   const [currentAudioTime, setCurrentAudioTime] = React.useState();
   const [initStartTime, setInitStartTime] = React.useState();
@@ -19,6 +20,7 @@ export default function Home() {
 
   const handleAudioFileChange = (e) => {
     const file = e.target.files[0];
+    setAudioFileName(file.name);
     const url = URL.createObjectURL(file);
     localStorage.setItem('url', url);
     setAudioFile(url);
@@ -86,7 +88,7 @@ export default function Home() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ snips: audioSnips }),
+      body: JSON.stringify({ audioFileName, snips: audioSnips }),
     })
       .then(() => console.log('## call done!'))
       .catch(() => console.log('## something flopped'));
