@@ -15,6 +15,7 @@ export default function Home() {
   const [fileAudioEndTime, setFileAudioEndTime] = React.useState();
   const [audioSnips, setAudioSnips] = React.useState([]);
   const [isRecording, setIsRecording] = React.useState(false);
+  const [isFileUploading, setIsFileUploading] = React.useState(false);
 
   const handleAudioFileChange = (e) => {
     const file = e.target.files[0];
@@ -28,6 +29,7 @@ export default function Home() {
     console.log('sendAudioToServer');
     const data = new FormData();
     data.append('file', file, file.name);
+    setIsFileUploading(true);
     await axios
       .post('http://localhost:3001/file', data, {
         onUploadProgress: (ProgressEvent) => {
@@ -38,7 +40,9 @@ export default function Home() {
         },
       })
       .then((res) => {
-        console.log('## res.statusText: ', res.statusText);
+        if (res.status === 200) {
+          setIsFileUploading(false);
+        }
       });
   };
 
@@ -128,6 +132,7 @@ export default function Home() {
       <div>
         <InputAudio handleAudioFileChange={handleAudioFileChange} />
         <InputImage handleImageFileChange={handleImageFileChange} />
+        {audioFile && isFileUploading ? <p>file uploading ...</p> : null}
         <div>
           {audioFile ? (
             <Audio
