@@ -5,6 +5,7 @@ import Snippet from '../components/snippet';
 import ImageToCanvas from '../components/image-to-canvas';
 import InputAudio from '../components/input-audio';
 import InputImage from '../components/input-image';
+import axios from 'axios';
 
 export default function Home() {
   const [audioFile, setAudioFile] = React.useState(null);
@@ -20,7 +21,27 @@ export default function Home() {
     const url = URL.createObjectURL(file);
     localStorage.setItem('url', url);
     setAudioFile(url);
+    sendAudioToServer(file);
   };
+
+  const sendAudioToServer = async (file) => {
+    console.log('sendAudioToServer');
+    const data = new FormData();
+    data.append('file', file, file.name);
+    await axios
+      .post('http://localhost:3001/file', data, {
+        onUploadProgress: (ProgressEvent) => {
+          console.log('## ProgressEvent: ', ProgressEvent.progress * 100);
+          // this.setState({
+          //   loaded: (ProgressEvent.loaded / ProgressEvent.total) * 100,
+          // });
+        },
+      })
+      .then((res) => {
+        console.log('## res.statusText: ', res.statusText);
+      });
+  };
+
   const handleImageFileChange = (e) => {
     const file = e.target.files[0];
     const url = URL.createObjectURL(file);
