@@ -34,9 +34,6 @@ export default function Home() {
       .post('http://localhost:3001/file', data, {
         onUploadProgress: (ProgressEvent) => {
           console.log('## ProgressEvent: ', ProgressEvent.progress * 100);
-          // this.setState({
-          //   loaded: (ProgressEvent.loaded / ProgressEvent.total) * 100,
-          // });
         },
       })
       .then((res) => {
