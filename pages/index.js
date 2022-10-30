@@ -119,6 +119,11 @@ export default function Home() {
     setAudioSnips(findSnippnet);
   };
 
+  const deleteSnippet = (id) => {
+    const filterOutSnippet = audioSnips.filter((snip) => id !== snip.id);
+    setAudioSnips(filterOutSnippet);
+  };
+
   const handleAudioEndTime = (duration) => {
     setFileAudioEndTime(duration);
   };
@@ -174,6 +179,7 @@ export default function Home() {
                     handlePlusTimeChange={handlePlusTimeChange}
                     isSnippetCreated={audioSnip?.isSnippetCreated}
                     fileAudioEndTime={fileAudioEndTime}
+                    deleteSnippet={deleteSnippet}
                   />
                 </li>
               ))}

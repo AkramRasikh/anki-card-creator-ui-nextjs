@@ -13,6 +13,7 @@ const Snippet = ({
   handleMinusTimeChange,
   handlePlusTimeChange,
   fileAudioEndTime,
+  deleteSnippet,
 }: any) => {
   const downloadSnippet = () => {
     const canvasId = `myCanvas${id}`;
@@ -37,13 +38,20 @@ const Snippet = ({
     handlePlusTimeChange({ id, newEndTime });
   };
 
+  const handleDelete = () => {
+    deleteSnippet(id);
+  };
+
   return (
     <div style={{ border: '1px solid' }}>
       <div>
-        <p>
-          Audio references (from {startTime?.toFixed(2)} to{' '}
-          {endTime?.toFixed(2)})
-        </p>
+        <div style={{ display: 'inline-flex', margin: '10px' }}>
+          <p>
+            Audio references (from {startTime?.toFixed(2)} to{' '}
+            {endTime?.toFixed(2)})
+          </p>
+          <button onClick={handleDelete}>X</button>
+        </div>
         <Audio audioFile={audioFile} startTime={startTime} endTime={endTime} />
         <div>
           <button onClick={handleRewind}>rewind -0.5</button>
