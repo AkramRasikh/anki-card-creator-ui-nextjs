@@ -61,11 +61,7 @@ const Snippet = ({
             forward +0.5
           </button>
         </div>
-        <ImageToCanvas
-          imageFile={imageFile}
-          imageId={id}
-          isSnippetCreated={isSnippetCreated}
-        />
+        <ImageToCanvas imageFile={imageFile} imageId={id} />
         <div>
           {isSnippetCreated ? (
             <span>snippet created!</span>
