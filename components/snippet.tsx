@@ -40,7 +40,6 @@ const Snippet = ({
   return (
     <div style={{ border: '1px solid' }}>
       <div>
-        {/* span with audio references */}
         <p>
           Audio references (from {startTime?.toFixed(2)} to{' '}
           {endTime?.toFixed(2)})

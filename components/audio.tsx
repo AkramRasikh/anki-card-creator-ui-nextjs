@@ -12,18 +12,25 @@ const Audio = ({
   const snippet = startTime || endTime;
 
   const audioRef = React.useRef(null);
+  const sourceRef = React.useRef(null);
 
   const internalHandleTimeUpdate = (evt) => {
     const { currentTime } = evt.target;
-    const currentTimeIsBeforeStartTime = currentTime < startTime;
-    const currentTimeIsAfterEndTime = currentTime > endTime;
+    const [realstartTime, realEndtime] = sourceRef.current.src
+      .split('#')[1]
+      .split(',');
+
+    const finalRealStartTime = realstartTime.replace('t=', '');
+
+    const currentTimeIsBeforeStartTime = currentTime < finalRealStartTime;
+    const currentTimeIsAfterEndTime = currentTime > realEndtime;
 
     if (currentTimeIsBeforeStartTime) {
       audioRef.current.pause();
-      audioRef.current.currentTime = startTime;
+      audioRef.current.currentTime = finalRealStartTime;
     } else if (currentTimeIsAfterEndTime) {
       audioRef.current.pause();
-      audioRef.current.currentTime = endTime;
+      audioRef.current.currentTime = realEndtime;
     }
   };
 
@@ -60,7 +67,7 @@ const Audio = ({
 
   return (
     <audio controls className={styles.audioOriginal} ref={audioRef}>
-      <source src={source} type='audio/mpeg' />
+      <source ref={sourceRef} src={source} type='audio/mpeg' />
     </audio>
   );
 };
