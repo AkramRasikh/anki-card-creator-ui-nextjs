@@ -54,13 +54,24 @@ const Snippet = ({
         </div>
         <Audio audioFile={audioFile} startTime={startTime} endTime={endTime} />
         <div>
-          <button onClick={handleRewind}>rewind -0.5</button>
-          <button onClick={handleForward}>forward +0.5</button>
+          <button onClick={handleRewind} disabled={isSnippetCreated}>
+            rewind -0.5
+          </button>
+          <button onClick={handleForward} disabled={isSnippetCreated}>
+            forward +0.5
+          </button>
         </div>
-        <ImageToCanvas imageFile={imageFile} imageId={id} />
+        <ImageToCanvas
+          imageFile={imageFile}
+          imageId={id}
+          isSnippetCreated={isSnippetCreated}
+        />
         <div>
-          <button onClick={downloadSnippet}>create snippet</button>
-          {isSnippetCreated ? <span>snippet created!</span> : null}
+          {isSnippetCreated ? (
+            <span>snippet created!</span>
+          ) : (
+            <button onClick={downloadSnippet}>create snippet</button>
+          )}
         </div>
       </div>
     </div>
