@@ -94,6 +94,19 @@ export default function Home() {
       .catch(() => console.log('## something flopped'));
   };
 
+  const handleToSnipAPI = async (snipId) => {
+    const selectedSnip = audioSnips.filter((snip) => snip.id === snipId);
+    await fetch('http://localhost:3001', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ audioFileName, snips: audioSnips }),
+    })
+      .then(() => console.log('## call done!'))
+      .catch(() => console.log('## something flopped'));
+  };
+
   const handleMinusTimeChange = ({ id, newStartTime }) => {
     const findSnippnet = audioSnips.map((snip) => {
       if (snip.id === id) {
@@ -180,6 +193,7 @@ export default function Home() {
                     isSnippetCreated={audioSnip?.isSnippetCreated}
                     fileAudioEndTime={fileAudioEndTime}
                     deleteSnippet={deleteSnippet}
+                    handleToSnipAPI={handleToSnipAPI}
                   />
                 </li>
               ))}

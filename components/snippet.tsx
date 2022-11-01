@@ -14,6 +14,7 @@ const Snippet = ({
   handlePlusTimeChange,
   fileAudioEndTime,
   deleteSnippet,
+  handleToSnipAPI,
 }: any) => {
   const downloadSnippet = () => {
     const canvasId = `myCanvas${id}`;
@@ -42,6 +43,10 @@ const Snippet = ({
     deleteSnippet(id);
   };
 
+  const handleCreateSnipAPI = () => {
+    handleToSnipAPI(id);
+  };
+
   return (
     <div style={{ border: '1px solid' }}>
       <div>
@@ -68,6 +73,11 @@ const Snippet = ({
           ) : (
             <button onClick={downloadSnippet}>create snippet</button>
           )}
+          <div>
+            {isSnippetCreated ? (
+              <button onClick={handleCreateSnipAPI}>API call</button>
+            ) : null}
+          </div>
         </div>
       </div>
     </div>
