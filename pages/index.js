@@ -96,14 +96,26 @@ export default function Home() {
 
   const handleToSnipAPI = async (snipId) => {
     const selectedSnip = audioSnips.filter((snip) => snip.id === snipId);
-    await fetch('http://localhost:3001', {
+    console.log('## selectedSnip: ', selectedSnip);
+    await fetch('http://localhost:3001/snippet', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ audioFileName, snips: audioSnips }),
+      body: JSON.stringify({ audioFileName, snips: selectedSnip }),
     })
-      .then(() => console.log('## call done!'))
+      .then(() => {
+        const updatedSnips = audioSnips.map((snip) => {
+          if (snip.id === snipId) {
+            return {
+              ...snip,
+              createdInAnki: true,
+            };
+          }
+          return snip;
+        });
+        setAudioSnips(updatedSnips);
+      })
       .catch(() => console.log('## something flopped'));
   };
 
@@ -194,6 +206,7 @@ export default function Home() {
                     fileAudioEndTime={fileAudioEndTime}
                     deleteSnippet={deleteSnippet}
                     handleToSnipAPI={handleToSnipAPI}
+                    createdInAnki={audioSnip?.createdInAnki}
                   />
                 </li>
               ))}

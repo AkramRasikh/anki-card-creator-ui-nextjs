@@ -15,6 +15,7 @@ const Snippet = ({
   fileAudioEndTime,
   deleteSnippet,
   handleToSnipAPI,
+  createdInAnki,
 }: any) => {
   const downloadSnippet = () => {
     const canvasId = `myCanvas${id}`;
@@ -74,8 +75,10 @@ const Snippet = ({
             <button onClick={downloadSnippet}>create snippet</button>
           )}
           <div>
-            {isSnippetCreated ? (
+            {isSnippetCreated && !createdInAnki ? (
               <button onClick={handleCreateSnipAPI}>API call</button>
+            ) : createdInAnki ? (
+              <span>Snippet in anki!</span>
             ) : null}
           </div>
         </div>
