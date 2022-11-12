@@ -35,8 +35,10 @@ const ImageToCanvas = ({ imageFile, imageId, master }) => {
       const ctx = canvas.getContext('2d');
       const imageHeight = imageRef.current.height * 0.5;
       const imageWidth = imageRef.current.width * 0.5;
+
       canvas.width = imageWidth;
       canvas.height = imageHeight;
+
       ctx.drawImage(image, 0, 0, imageWidth, imageHeight);
       document.addEventListener('mousedown', start);
     }

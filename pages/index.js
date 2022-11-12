@@ -6,6 +6,7 @@ import ImageToCanvas from '../components/image-to-canvas';
 import InputAudio from '../components/input-audio';
 import InputImage from '../components/input-image';
 import axios from 'axios';
+import InputAnkiDeckName from '../components/input-anki-deck';
 
 export default function Home() {
   const [audioFile, setAudioFile] = React.useState(null);
@@ -17,6 +18,7 @@ export default function Home() {
   const [audioSnips, setAudioSnips] = React.useState([]);
   const [isRecording, setIsRecording] = React.useState(false);
   const [isFileUploading, setIsFileUploading] = React.useState(false);
+  const [ankiDeckTitle, setAnkiDeckTitle] = React.useState('');
 
   const handleAudioFileChange = (e) => {
     const file = e.target.files[0];
@@ -82,17 +84,21 @@ export default function Home() {
     setAudioSnips(findSnippnet);
   };
 
-  const handleToJsonFile = async () => {
-    await fetch('http://localhost:3001', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ audioFileName, snips: audioSnips }),
-    })
-      .then(() => console.log('## call done!'))
-      .catch(() => console.log('## something flopped'));
-  };
+  // const handleToJsonFile = async () => {
+  //   await fetch('http://localhost:3001', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({
+  //       audioFileName,
+  //       snips: audioSnips,
+  //       ankiDeckName: ankiDeckTitle,
+  //     }),
+  //   })
+  //     .then(() => console.log('## call done!'))
+  //     .catch(() => console.log('## something flopped'));
+  // };
 
   const handleToSnipAPI = async (snipId) => {
     const selectedSnip = audioSnips.filter((snip) => snip.id === snipId);
@@ -102,7 +108,11 @@ export default function Home() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ audioFileName, snips: selectedSnip }),
+      body: JSON.stringify({
+        audioFileName,
+        snips: selectedSnip,
+        ankiDeckName: ankiDeckTitle,
+      }),
     })
       .then(() => {
         const updatedSnips = audioSnips.map((snip) => {
@@ -161,6 +171,10 @@ export default function Home() {
       <div>
         <InputAudio handleAudioFileChange={handleAudioFileChange} />
         <InputImage handleImageFileChange={handleImageFileChange} />
+        <InputAnkiDeckName
+          handleChange={setAnkiDeckTitle}
+          value={ankiDeckTitle}
+        />
         {audioFile && isFileUploading ? <p>file uploading ...</p> : null}
         <div>
           {audioFile ? (
@@ -172,8 +186,14 @@ export default function Home() {
             />
           ) : null}
         </div>
-        <button onClick={handleToJsonFile}>Write to json file</button>
         <div>
+          {/* <button
+            style={{ background: isRecording ? 'red' : '' }}
+            onClick={handleRewind}
+          >
+            ++ rewind (2)
+          </button>
+          <span style={{ padding: '10px' }} /> */}
           <button
             style={{ background: isRecording ? 'red' : '' }}
             onMouseDown={handleOnMouseDown}
