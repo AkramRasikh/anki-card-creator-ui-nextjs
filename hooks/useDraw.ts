@@ -28,8 +28,8 @@ const useDraw = (canvasId) => {
 
   const reposition = (event) => {
     if (canvas) {
-      coord.x = event.clientX - canvas?.offsetLeft;
-      coord.y = event.clientY - canvas?.offsetTop;
+      coord.x = event.pageX - canvas?.offsetLeft;
+      coord.y = event.pageY - canvas?.offsetTop;
     }
   };
 
