@@ -66,9 +66,11 @@ const Audio = ({
     : audioFile + `#t=${startTime},${endTime}`;
 
   return (
-    <audio controls className={styles.audioOriginal} ref={audioRef}>
-      <source ref={sourceRef} src={source} type='audio/mpeg' />
-    </audio>
+    <div>
+      <audio controls className={styles.audioOriginal} ref={audioRef}>
+        <source ref={sourceRef} src={source} type='audio/mpeg' />
+      </audio>
+    </div>
   );
 };
 

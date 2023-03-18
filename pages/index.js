@@ -171,13 +171,6 @@ export default function Home() {
           ) : null}
         </div>
         <div>
-          {/* <button
-            style={{ background: isRecording ? 'red' : '' }}
-            onClick={handleRewind}
-          >
-            ++ rewind (2)
-          </button>
-          <span style={{ padding: '10px' }} /> */}
           <button
             style={{ background: isRecording ? 'red' : '' }}
             onMouseDown={handleOnMouseDown}

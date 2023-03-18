@@ -1,8 +1,6 @@
 import React from 'react';
-import ConditionalWrapper from '../utils/conditional-wrapper';
 import Audio from './audio';
 import ImageToCanvas from './image-to-canvas';
-import SnippetCreatedOverlay from './snippet-created-overlay';
 
 const Snippet = ({
   audioFile,
@@ -51,22 +49,22 @@ const Snippet = ({
   };
 
   return (
-    // <ConditionalWrapper
-    //   wrapper={(children) => (
-    //     <SnippetCreatedOverlay>{children}</SnippetCreatedOverlay>
-    //   )}
-    //   condition={createdInAnki}
-    // >
     <div style={{ border: '1px solid' }}>
       <div>
-        <div style={{ display: 'inline-flex', margin: '10px' }}>
-          <p>
-            Audio references (from {startTime?.toFixed(2)} to{' '}
-            {endTime?.toFixed(2)})
-          </p>
-          <button onClick={handleDelete}>X</button>
+        <div>
+          <div style={{ display: 'inline-flex', margin: '10px' }}>
+            <p>
+              Audio references (from {startTime?.toFixed(2)} to{' '}
+              {endTime?.toFixed(2)})
+            </p>
+            <button onClick={handleDelete}>X</button>
+          </div>
+          <Audio
+            audioFile={audioFile}
+            startTime={startTime}
+            endTime={endTime}
+          />
         </div>
-        <Audio audioFile={audioFile} startTime={startTime} endTime={endTime} />
         <div>
           <button onClick={handleRewind} disabled={isSnippetCreated}>
             rewind -0.5
@@ -92,7 +90,6 @@ const Snippet = ({
         </div>
       </div>
     </div>
-    // </ConditionalWrapper>
   );
 };
 
