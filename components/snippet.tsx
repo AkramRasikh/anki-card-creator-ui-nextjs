@@ -1,4 +1,5 @@
 import React from 'react';
+import { secondsToMinutes } from '../utils/seconds-to-minutes';
 import Audio from './audio';
 import ImageToCanvas from './image-to-canvas';
 
@@ -54,10 +55,19 @@ const Snippet = ({
         <div>
           <div style={{ display: 'inline-flex', margin: '10px' }}>
             <p>
-              Audio references (from {startTime?.toFixed(2)} to{' '}
-              {endTime?.toFixed(2)})
+              from {secondsToMinutes(startTime)} to {secondsToMinutes(endTime)}
             </p>
-            <button onClick={handleDelete}>X</button>
+            <button
+              onClick={handleDelete}
+              style={{
+                border: 'none',
+                borderRadius: '10px',
+                padding: '8px',
+                margin: 'auto 10px',
+              }}
+            >
+              X
+            </button>
           </div>
           <Audio
             audioFile={audioFile}
