@@ -5,19 +5,28 @@ const useDraw = (canvasId) => {
 
   let coord = { x: 0, y: 0 };
 
+  const getMousePos = (evt) => {
+    const rect = canvas.getBoundingClientRect();
+    coord.x = evt.clientX - rect.left;
+    coord.y = evt.clientY - rect.top;
+  };
+
   const start = (evt) => {
     document.addEventListener('mousemove', draw);
     document.addEventListener('mouseup', stop);
     reposition(evt);
   };
-  const draw = () => {
+  console.log('## coord: ', coord);
+
+  const draw = (drawEvt) => {
     const ctx = canvas?.getContext('2d');
+    getMousePos(drawEvt);
     ctx.beginPath();
     ctx.lineWidth = 5;
     ctx.lineCap = 'round';
     ctx.strokeStyle = '#ACD3ED';
     ctx.moveTo(coord.x, coord.y);
-    reposition(event);
+    reposition(drawEvt);
     ctx.lineTo(coord.x, coord.y);
     ctx.stroke();
   };
@@ -27,10 +36,7 @@ const useDraw = (canvasId) => {
   };
 
   const reposition = (event) => {
-    if (canvas) {
-      coord.x = event.pageX - canvas?.offsetLeft;
-      coord.y = event.pageY - canvas?.offsetTop;
-    }
+    getMousePos(event);
   };
 
   React.useEffect(() => {
