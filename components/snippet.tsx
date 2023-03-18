@@ -1,6 +1,8 @@
 import React from 'react';
+import ConditionalWrapper from '../utils/conditional-wrapper';
 import Audio from './audio';
 import ImageToCanvas from './image-to-canvas';
+import SnippetCreatedOverlay from './snippet-created-overlay';
 
 const Snippet = ({
   audioFile,
@@ -49,6 +51,12 @@ const Snippet = ({
   };
 
   return (
+    // <ConditionalWrapper
+    //   wrapper={(children) => (
+    //     <SnippetCreatedOverlay>{children}</SnippetCreatedOverlay>
+    //   )}
+    //   condition={createdInAnki}
+    // >
     <div style={{ border: '1px solid' }}>
       <div>
         <div style={{ display: 'inline-flex', margin: '10px' }}>
@@ -84,6 +92,7 @@ const Snippet = ({
         </div>
       </div>
     </div>
+    // </ConditionalWrapper>
   );
 };
 
