@@ -1,7 +1,7 @@
 import React from 'react';
 import { secondsToMinutes } from '../utils/seconds-to-minutes';
 import Audio from './audio';
-import ImageToCanvas from './image-to-canvas';
+import ImageToCanvasSnippet from './image-to-canvas-snippet';
 
 const Snippet = ({
   audioFile,
@@ -96,7 +96,7 @@ const Snippet = ({
             forward +0.5
           </button>
         </div>
-        <ImageToCanvas imageFile={imageFile} imageId={id} />
+        <ImageToCanvasSnippet imageFile={imageFile} imageId={id} />
         <div>
           {isSnippetCreated ? (
             <span>snippet created!</span>

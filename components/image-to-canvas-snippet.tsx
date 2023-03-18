@@ -1,31 +1,12 @@
 import React from 'react';
+import Image from 'next/image';
 import useDraw from '../hooks/useDraw';
 
-const ImageToCanvas = ({ imageFile, imageId, master }) => {
+const ImageToCanvasSnippet = ({ imageFile, imageId }) => {
   const [imageLoaded, setImageLoaded] = React.useState(false);
 
   const canvasRef = React.useRef();
   const imageRef = React.useRef();
-
-  if (master) {
-    return (
-      <div>
-        <div
-          style={{
-            width: 'fit-content',
-            margin: 'auto',
-          }}
-        >
-          <img
-            id={imageId}
-            ref={imageRef}
-            src={imageFile}
-            style={{ border: '1px solid', width: '80%' }}
-          />
-        </div>
-      </div>
-    );
-  }
 
   const start = useDraw(imageId);
 
@@ -63,7 +44,7 @@ const ImageToCanvas = ({ imageFile, imageId, master }) => {
 
   return (
     <div>
-      <img id={imageId} ref={imageRef} src={imageFile} />
+      <Image id={imageId} ref={imageRef} src={imageFile} alt='snippet-image' />
       <div
         style={{
           border: '1px solid',
@@ -77,4 +58,4 @@ const ImageToCanvas = ({ imageFile, imageId, master }) => {
   );
 };
 
-export default ImageToCanvas;
+export default ImageToCanvasSnippet;

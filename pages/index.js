@@ -2,11 +2,11 @@ import React from 'react';
 import { nanoid } from 'nanoid';
 import Audio from '../components/audio';
 import Snippet from '../components/snippet';
-import ImageToCanvas from '../components/image-to-canvas';
 import InputAudio from '../components/input-audio';
 import InputImage from '../components/input-image';
 import axios from 'axios';
 import InputAnkiDeckName from '../components/input-anki-deck';
+import ImageToCanvasMaster from '../components/image-to-canvas-master';
 
 export default function Home() {
   const [audioFile, setAudioFile] = React.useState(null);
@@ -182,7 +182,7 @@ export default function Home() {
         </div>
         <div>
           {imageFile ? (
-            <ImageToCanvas imageFile={imageFile} imageId='1' master />
+            <ImageToCanvasMaster imageFile={imageFile} imageId='1' master />
           ) : null}
         </div>
         {audioSnips?.length > 0 ? (
