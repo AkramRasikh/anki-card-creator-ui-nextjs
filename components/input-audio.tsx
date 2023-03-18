@@ -7,7 +7,7 @@ const InputAudio = ({ handleAudioFileChange }) => (
       type='file'
       id='audio'
       name='audio'
-      accept='audio/mp3'
+      accept='audio/*'
       onChange={handleAudioFileChange}
     />
   </div>
