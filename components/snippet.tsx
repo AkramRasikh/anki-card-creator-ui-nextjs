@@ -17,6 +17,7 @@ const Snippet = ({
   deleteSnippet,
   handleToSnipAPI,
   createdInAnki,
+  numberOrder,
 }: any) => {
   const downloadSnippet = () => {
     const canvasId = `myCanvas${id}`;
@@ -50,7 +51,19 @@ const Snippet = ({
   };
 
   return (
-    <div style={{ border: '1px solid', marginBottom: '10px', padding: '10px' }}>
+    <div
+      style={{
+        border: '1px solid',
+        marginBottom: '10px',
+        padding: '10px',
+        position: 'relative',
+      }}
+    >
+      {Number.isInteger(numberOrder) && (
+        <span style={{ position: 'absolute', left: '0', margin: '10px' }}>
+          # {numberOrder}
+        </span>
+      )}
       <div>
         <div>
           <div style={{ display: 'inline-flex', margin: '10px' }}>

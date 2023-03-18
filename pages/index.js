@@ -188,7 +188,7 @@ export default function Home() {
         {audioSnips?.length > 0 ? (
           <div>
             <ul>
-              {audioSnips.map((audioSnip) => (
+              {audioSnips.map((audioSnip, index) => (
                 <li key={audioSnip.id}>
                   <Snippet
                     id={audioSnip.id}
@@ -204,6 +204,7 @@ export default function Home() {
                     deleteSnippet={deleteSnippet}
                     handleToSnipAPI={handleToSnipAPI}
                     createdInAnki={audioSnip?.createdInAnki}
+                    numberOrder={index}
                   />
                 </li>
               ))}
