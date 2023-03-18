@@ -49,7 +49,7 @@ const Snippet = ({
   };
 
   return (
-    <div style={{ border: '1px solid' }}>
+    <div style={{ border: '1px solid', marginBottom: '10px', padding: '10px' }}>
       <div>
         <div>
           <div style={{ display: 'inline-flex', margin: '10px' }}>
