@@ -54,6 +54,7 @@ const Snippet = ({
     <div
       style={{
         border: '1px solid',
+        borderRadius: '10px',
         marginBottom: '10px',
         padding: '10px',
         position: 'relative',
@@ -61,7 +62,7 @@ const Snippet = ({
     >
       {Number.isInteger(numberOrder) && (
         <span style={{ position: 'absolute', left: '0', margin: '10px' }}>
-          # {numberOrder}
+          # {numberOrder + 1}
         </span>
       )}
       <div>
@@ -88,11 +89,19 @@ const Snippet = ({
             endTime={endTime}
           />
         </div>
-        <div>
-          <button onClick={handleRewind} disabled={isSnippetCreated}>
+        <div style={{ display: 'inline-flex', gap: '10px', padding: '10px' }}>
+          <button
+            onClick={handleRewind}
+            disabled={isSnippetCreated}
+            style={{ border: 'none', borderRadius: '10px', padding: '10px' }}
+          >
             rewind -0.5
           </button>
-          <button onClick={handleForward} disabled={isSnippetCreated}>
+          <button
+            onClick={handleForward}
+            disabled={isSnippetCreated}
+            style={{ border: 'none', borderRadius: '10px', padding: '10px' }}
+          >
             forward +0.5
           </button>
         </div>
@@ -101,7 +110,17 @@ const Snippet = ({
           {isSnippetCreated ? (
             <span>snippet created!</span>
           ) : (
-            <button onClick={downloadSnippet}>create snippet</button>
+            <button
+              onClick={downloadSnippet}
+              style={{
+                border: 'none',
+                borderRadius: '10px',
+                padding: '10px',
+                marginTop: '10px',
+              }}
+            >
+              create snippet
+            </button>
           )}
           <div>
             {isSnippetCreated && !createdInAnki ? (
