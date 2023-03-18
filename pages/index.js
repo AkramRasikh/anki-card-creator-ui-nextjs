@@ -187,9 +187,12 @@ export default function Home() {
         </div>
         {audioSnips?.length > 0 ? (
           <div>
-            <ul>
+            <ul style={{ display: 'flex', flexWrap: 'wrap' }}>
               {audioSnips.map((audioSnip, index) => (
-                <li key={audioSnip.id}>
+                <li
+                  key={audioSnip.id}
+                  style={{ flex: '1 0 40%', margin: '10px' }}
+                >
                   <Snippet
                     id={audioSnip.id}
                     audioFile={audioFile}
