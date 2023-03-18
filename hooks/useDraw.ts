@@ -16,7 +16,6 @@ const useDraw = (canvasId) => {
     document.addEventListener('mouseup', stop);
     reposition(evt);
   };
-  console.log('## coord: ', coord);
 
   const draw = (drawEvt) => {
     const ctx = canvas?.getContext('2d');
