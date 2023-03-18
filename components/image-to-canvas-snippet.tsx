@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 import useDraw from '../hooks/useDraw';
 
 const ImageToCanvasSnippet = ({ imageFile, imageId }) => {
@@ -44,7 +43,7 @@ const ImageToCanvasSnippet = ({ imageFile, imageId }) => {
 
   return (
     <div>
-      <Image id={imageId} ref={imageRef} src={imageFile} alt='snippet-image' />
+      <img id={imageId} ref={imageRef} src={imageFile} alt='snippet-image' />
       <div
         style={{
           border: '1px solid',

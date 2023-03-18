@@ -1,5 +1,4 @@
 import React from 'react';
-import Image from 'next/image';
 
 const ImageToCanvasMaster = ({ imageFile, imageId }) => {
   const imageRef = React.useRef();
@@ -12,7 +11,7 @@ const ImageToCanvasMaster = ({ imageFile, imageId }) => {
           margin: 'auto',
         }}
       >
-        <Image
+        <img
           id={imageId}
           ref={imageRef}
           src={imageFile}
